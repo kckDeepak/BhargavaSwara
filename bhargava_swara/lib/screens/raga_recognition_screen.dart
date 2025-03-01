@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class RagaRecognitionScreen extends StatefulWidget {
+  const RagaRecognitionScreen({super.key});
+
   @override
   _RagaRecognitionScreenState createState() => _RagaRecognitionScreenState();
 }
@@ -47,11 +49,11 @@ class _RagaRecognitionScreenState extends State<RagaRecognitionScreen> {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: toggleRecording,
-              child: Text(isRecording ? 'Stop Recording' : 'Start Recording'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: isRecording ? Colors.red : Colors.green,
                 padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
               ),
+              child: Text(isRecording ? 'Stop Recording' : 'Start Recording'),
             ),
             SizedBox(height: 20),
             Card(

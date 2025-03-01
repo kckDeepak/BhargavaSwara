@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ComposeMusicScreen extends StatelessWidget {
+  const ComposeMusicScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

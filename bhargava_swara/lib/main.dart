@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
+import 'screens/login_page.dart';
 
 void main() {
   runApp(BhargavaSwaraApp());
 }
 
 class BhargavaSwaraApp extends StatelessWidget {
+  const BhargavaSwaraApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,7 +15,7 @@ class BhargavaSwaraApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(),
+      home: LoginPage(),
     );
   }
 }

@@ -22,6 +22,8 @@ class LearnRagasScreen extends StatelessWidget {
     },
   ];
 
+LearnRagasScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
