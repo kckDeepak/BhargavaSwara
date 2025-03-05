@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'music_analysis/music_analysis_screen.dart';
-import 'exploratory_tools/exploratory_tools_screen.dart';
-import 'music_synthesis/music_synthesis_screen.dart';
-import 'profile/profile_screen.dart';
+import './screens/music_analysis/music_analysis_screen.dart';
+import './screens/exploratory_tools/exploratory_tools_screen.dart';
+import './screens/music_synthesis/music_synthesis_screen.dart';
+import './screens/profile/profile_screen.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -3,6 +3,8 @@ import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 
 class OrnamentationDetectionScreen extends StatefulWidget {
+  const OrnamentationDetectionScreen({super.key});
+
   @override
   _OrnamentationDetectionScreenState createState() =>
       _OrnamentationDetectionScreenState();

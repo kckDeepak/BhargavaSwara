@@ -7,6 +7,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http; // If using server-side model
 
 class RepeatedPatternRecognitionScreen extends StatefulWidget {
+  const RepeatedPatternRecognitionScreen({super.key});
+
   @override
   _RepeatedPatternRecognitionScreenState createState() =>
       _RepeatedPatternRecognitionScreenState();

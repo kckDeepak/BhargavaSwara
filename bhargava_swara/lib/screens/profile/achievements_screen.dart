@@ -8,6 +8,8 @@ class AchievementsScreen extends StatelessWidget {
     "🎶 Created First Composition",
   ];
 
+  const AchievementsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

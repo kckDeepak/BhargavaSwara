@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 
 class CarnaticHindustaniScreen extends StatefulWidget {
+  const CarnaticHindustaniScreen({super.key});
+
   @override
   _CarnaticHindustaniScreenState createState() => _CarnaticHindustaniScreenState();
 }

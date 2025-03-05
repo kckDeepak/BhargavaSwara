@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class GenerateCompositionsScreen extends StatelessWidget {
+  const GenerateCompositionsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

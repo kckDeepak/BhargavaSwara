@@ -3,6 +3,8 @@ import 'carnatic_pattern_explorer.dart';
 import 'visualization_tools.dart';
 
 class ExploratoryToolsScreen extends StatelessWidget {
+  const ExploratoryToolsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

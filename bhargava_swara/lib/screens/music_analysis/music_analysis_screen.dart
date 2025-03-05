@@ -6,6 +6,8 @@ import 'tala_recognition.dart';
 import 'raga_recognition.dart';
 
 class MusicAnalysisScreen extends StatelessWidget {
+  const MusicAnalysisScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

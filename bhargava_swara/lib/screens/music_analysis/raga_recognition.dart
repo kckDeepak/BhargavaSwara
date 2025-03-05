@@ -6,6 +6,8 @@ import 'package:flutter_sound/flutter_sound.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class RagaRecognitionScreen extends StatefulWidget {
+  const RagaRecognitionScreen({super.key});
+
   @override
   _RagaRecognitionScreenState createState() => _RagaRecognitionScreenState();
 }
@@ -50,11 +52,16 @@ class _RagaRecognitionScreenState extends State<RagaRecognitionScreen> {
   }
 
   Future<void> _startRecording() async {
-    if (await Permission.microphone.request().isGranted) {
-      setState(() => _isRecording = true);
-      _recordedFilePath = await _audioRecorder!.startRecorder(
-        toFile: 'raga_recorded.wav',
+     if (await Permission.microphone.request().isGranted) {
+      var toFile = 'raga_recorded.wav';
+      String? recordedFilePath = await _audioRecorder!.startRecorder(
+        toFile: toFile,
       );
+      setState(() {
+        _isRecording = true;
+        _recordedFilePath = recordedFilePath;
+      });
+
     }
   }
 

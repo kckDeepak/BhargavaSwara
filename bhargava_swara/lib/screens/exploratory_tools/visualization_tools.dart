@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class VisualizationToolsScreen extends StatelessWidget {
+  const VisualizationToolsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

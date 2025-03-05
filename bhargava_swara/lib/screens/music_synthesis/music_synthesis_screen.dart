@@ -3,6 +3,8 @@ import 'generate_compositions.dart';
 import 'playback_export.dart';
 
 class MusicSynthesisScreen extends StatelessWidget {
+  const MusicSynthesisScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
