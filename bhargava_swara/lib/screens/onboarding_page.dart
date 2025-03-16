@@ -1,5 +1,6 @@
 import '../home_screen_c.dart';
 import 'package:flutter/material.dart';
+import '../screens/login_page.dart';
 
 class OnboardingPageModel {
   final String title;
@@ -164,6 +165,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       onPressed: () {
                         if (_currentPage == pages.length - 1) {
                           // Handle finish action
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage()),
+                          );
                         } else {
                           _pageController.animateToPage(_currentPage + 1,
                               duration: const Duration(milliseconds: 250),
@@ -171,7 +177,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         }
                       },
                       child: Text(
-                        _currentPage == pages.length - 1 ? "Finish" : "Next",
+                        _currentPage == pages.length - 1 ? "Login" : "Next",
                         style: const TextStyle(color: Colors.white),
                       ),
                     ),

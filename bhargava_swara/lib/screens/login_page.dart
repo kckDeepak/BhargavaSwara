@@ -178,6 +178,18 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ],
                       ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomeScreen()),
+                          );
+                        },
+                        child: Text(
+                          "Skip login for now",
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      )
                     ],
                   ),
                 ),
