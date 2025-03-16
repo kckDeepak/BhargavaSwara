@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_sound/flutter_sound.dart';
@@ -51,19 +51,19 @@ class _RagaRecognitionScreenState extends State<RagaRecognitionScreen> {
     }
   }
 
-  Future<void> _startRecording() async {
-     if (await Permission.microphone.request().isGranted) {
-      var toFile = 'raga_recorded.wav';
-      String? recordedFilePath = await _audioRecorder!.startRecorder(
-        toFile: toFile,
-      );
-      setState(() {
-        _isRecording = true;
-        _recordedFilePath = recordedFilePath;
-      });
-
-    }
+Future<void> _startRecording() async {
+  if (await Permission.microphone.request().isGranted) {
+    var tempDir = await getTemporaryDirectory();
+    var toFile = '${tempDir.path}/raga_recorded.wav';
+    await _audioRecorder!.startRecorder(
+      toFile: toFile,
+    );
+    setState(() {
+      _isRecording = true;
+      _recordedFilePath = toFile;
+    });
   }
+}
 
   Future<void> _stopRecording() async {
     await _audioRecorder!.stopRecorder();

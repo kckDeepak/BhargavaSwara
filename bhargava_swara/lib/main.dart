@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/login_page.dart';
+import 'screens/onboarding_page.dart';
 
 void main() {
   runApp(BhargavaSwaraApp());
@@ -15,7 +15,7 @@ class BhargavaSwaraApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(),
+      home: OnboardingPage(),
     );
   }
 }

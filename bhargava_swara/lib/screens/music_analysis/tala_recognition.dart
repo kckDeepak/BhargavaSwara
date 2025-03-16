@@ -52,13 +52,13 @@ class _TalaRecognitionScreenState extends State<TalaRecognitionScreen> {
   }
 
   Future<void> _startRecording() async {
-    if (await Permission.microphone.request().isGranted) {
-      setState(() => _isRecording = true);
-      _recordedFilePath = await _audioRecorder!.startRecorder(
-        toFile: 'tala_recorded.wav',
-      );
-    }
+  if (await Permission.microphone.request().isGranted) {
+    setState(() => _isRecording = true);
+    await _audioRecorder!.startRecorder(
+      toFile: 'tala_recorded.wav',
+    );
   }
+}
 
   Future<void> _stopRecording() async {
     await _audioRecorder!.stopRecorder();

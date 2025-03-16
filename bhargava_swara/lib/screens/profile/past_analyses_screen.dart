@@ -7,7 +7,7 @@ class PastAnalysesScreen extends StatelessWidget {
     "New Composition - Feb 10, 2025",
   ];
 
-  const PastAnalysesScreen({super.key});
+  PastAnalysesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

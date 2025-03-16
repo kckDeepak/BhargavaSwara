@@ -3,8 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 import 'package:ffmpeg_kit_flutter_min/ffmpeg_kit.dart';
 import 'package:tflite_flutter/tflite_flutter.dart'; // Load TensorFlow Lite model
-import 'dart:convert';
-import 'package:http/http.dart' as http; // If using server-side model
+// If using server-side model
 
 class RepeatedPatternRecognitionScreen extends StatefulWidget {
   const RepeatedPatternRecognitionScreen({super.key});
@@ -17,7 +16,6 @@ class RepeatedPatternRecognitionScreen extends StatefulWidget {
 class _RepeatedPatternRecognitionScreenState extends State<RepeatedPatternRecognitionScreen> {
   File? _selectedFile;
   String _analysisResult = "No file selected";
-  final FlutterFFmpeg _flutterFFmpeg = FlutterFFmpeg();
   Interpreter? _interpreter; // TFLite model interpreter
 
   @override
@@ -54,7 +52,7 @@ class _RepeatedPatternRecognitionScreenState extends State<RepeatedPatternRecogn
     String outputPath = "${audioFile.path}.wav";
 
     // Convert to WAV format for feature extraction
-    await _flutterFFmpeg.execute("-i ${audioFile.path} -ar 16000 -ac 1 $outputPath");
+    await FFmpegKit.execute("-i ${audioFile.path} -ar 16000 -ac 1 $outputPath");
 
     // Use an ML model to detect patterns
     await _detectPatterns(outputPath);
