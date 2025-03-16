@@ -3,7 +3,7 @@
 
 **Library & Tool for Analysis & Synthesis of Indian Classical Music**
 
-BhargavaSwara is a robust toolkit for the analysis and synthesis of Indian Classical Music. It is designed to bridge traditional music theory with modern audio processing techniques, making it an ideal resource for researchers, developers, and musicians.
+BhargavaSwara is a comprehensive toolkit designed to analyze and synthesize Indian Classical Music using advanced signal processing and machine learning techniques. Built on the Flutter framework, this project delivers a modern, cross-platform UI while leveraging native performance for intensive audio processing tasks.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![Languages](https://img.shields.io/github/languages/count/Shouryaanga-Tribe/BhargavaSwara)](https://github.com/Shouryaanga-Tribe/BhargavaSwara)
 
@@ -26,50 +26,63 @@ BhargavaSwara is a robust toolkit for the analysis and synthesis of Indian Class
 
 ## Overview
 
-BhargavaSwara is a comprehensive library and toolset that supports both the analysis and synthesis of Indian Classical Music. With implementations in Dart, C++, Swift, and additional supportive technologies, it offers:
-- **In-depth analysis:** Extract musical features like pitch, rhythm, and tonal patterns.
-- **Authentic synthesis:** Generate realistic sounds based on traditional Indian Classical principles.
-- **Extensibility:** A modular design that allows for future enhancements and integrations.
+BhargavaSwara bridges the rich tradition of Indian Classical Music with modern audio processing techniques. The toolkit provides a robust platform for both music analysis and synthesis. With a Flutter-based interface, users can easily interact with sophisticated features including:
+
+- **Music Analysis:** Advanced tools for raga recognition, tala recognition, tempo detection, ornamentation detection & classification, and real-time music analysis.
+- **Spectrogram Generation:** Visualizations using MFCC, Mel spectrograms, and various signal processing graphs.
+- **Music Synthesis:** Capabilities for instrument imitation, tanpura drone sound generation, and tala generation.
 
 ---
 
 ## Features
 
-- **Advanced Audio Analysis:** Utilize signal processing techniques to analyze recordings and live inputs.
-- **Realistic Sound Synthesis:** Generate and manipulate sound sequences that adhere to classical Indian music traditions.
-- **Multi-Language Support:** Core logic in Dart; performance-critical modules in C++; mobile integration with Swift.
-- **Developer-Friendly:** Well-documented code and clear repository structure ensure a smooth onboarding experience.
+### Music Analysis Tools
+- **Raga Recognition:** Identify and analyze the raga being performed.
+- **Tala Recognition:** Detect and interpret rhythmic patterns (talas) within the music.
+- **Tempo Detection:** Automatically determine the tempo of musical pieces.
+- **Ornamentation Detection & Classification:** Analyze subtle musical embellishments unique to Indian Classical styles.
+- **Hindustani/Carnatic Identifier:** Distinguish between Hindustani and Carnatic music styles.
+- **Real-Time Music Analysis:** Process live or recorded audio for immediate insights.
+- **Spectrogram Visualizations:** Generate MFCC, Mel spectrograms, and various signal processing graphs to visualize audio features.
+
+### Music Synthesis Tools
+- **Instrument Imitation:** Synthesize sounds that mimic traditional musical instruments.
+- **Tanpura Drone Generation:** Produce continuous tanpura drone sounds to support musical practice.
+- **Tala Generation:** Create rhythmic cycles and patterns that emulate traditional talas.
 
 ---
 
 ## Technologies Used
 
-- **Dart:** Implements the core application logic and high-level abstractions.
-- **C++:** Handles performance-intensive tasks such as audio processing and algorithm implementation.
-- **CMake:** Facilitates cross-platform building and configuration of C++ components.
-- **Swift:** Supports native iOS/macOS development for mobile applications.
-- **HTML:** Used for documentation and potential web-based interfaces.
+- **Flutter:** Provides a rich, cross-platform user interface.
+- **Dart:** Core application logic, integrated with Flutter for seamless development.
+- **C++:** Handles performance-intensive audio processing and algorithm implementations.
+- **CMake:** Ensures smooth build and cross-platform compatibility for C++ modules.
+- **Swift:** Supports native development for iOS/macOS integration.
+- **HTML:** Used for supplementary documentation and potential web-based interfaces.
 
 ---
 
 ## Repository Structure
 
-The repository is organized to promote clarity and ease of navigation:
+The repository is organized to maintain clarity and facilitate both development and user engagement:
 
 ```
 BhargavaSwara/
-├── .vscode/             # VSCode settings and configuration files
-├── bhargava_swara/      # Main source code directory
-│   ├── core/           # Core modules for audio analysis
-│   ├── synthesis/      # Sound synthesis algorithms and implementations
-│   └── examples/       # Example applications and usage scripts
-├── README.md            # Project documentation (this file)
-└── LICENSE              # License details
+├── .vscode/                   # VSCode configuration and settings
+├── bhargava_swara/            # Main source code directory
+│   ├── core/                 # Core modules for audio analysis & synthesis
+│   │   ├── analysis/         # Tools for raga, tala, tempo, and ornamentation detection
+│   │   ├── synthesis/        # Modules for instrument imitation, tanpura drone, and tala generation
+│   │   └── visualization/    # Spectrogram generation (MFCC, Mel spectrograms, signal graphs)
+│   └── examples/             # Example apps and usage demonstrations (Flutter-based UI examples)
+├── README.md                  # Project documentation (this file)
+└── LICENSE                    # License information
 ```
 
-- **.vscode:** Contains editor-specific settings to help maintain a consistent development environment.
-- **bhargava_swara:** The heart of the project, with subdirectories segregating core functionality, synthesis routines, and usage examples.
-- **README.md:** This file serves as the central documentation, outlining project details and setup instructions.
+- **.vscode:** Contains configuration files for a consistent development environment.
+- **bhargava_swara:** Houses the core logic, segregated into analysis, synthesis, and visualization modules.
+- **examples:** Provides sample projects demonstrating how to utilize the toolkit within Flutter applications.
 
 ---
 
@@ -77,10 +90,10 @@ BhargavaSwara/
 
 ### Prerequisites
 
-- **Dart SDK:** [Installation Guide](https://dart.dev/get-dart)
-- **C++ Compiler:** A modern compiler supporting C++11 or later.
-- **CMake:** Required for building the C++ modules.
-- **Swift:** Necessary for iOS/macOS development.
+- **Flutter & Dart:** Install Flutter SDK (which includes Dart) from the [official Flutter website](https://flutter.dev/docs/get-started/install).
+- **C++ Compiler:** Ensure you have a modern C++ compiler that supports C++11 or later.
+- **CMake:** For building and configuring C++ modules.
+- **Swift:** Required for iOS/macOS builds (if applicable).
 
 ### Setup Instructions
 
@@ -91,7 +104,7 @@ BhargavaSwara/
    cd BhargavaSwara
    ```
 
-2. **Build the C++ Components**
+2. **Build C++ Components**
 
    ```bash
    mkdir build && cd build
@@ -99,36 +112,39 @@ BhargavaSwara/
    make
    ```
 
-3. **Run Dart or Swift Components**
+3. **Run Flutter Application**
 
-   - **For Dart:**
+   Navigate to the example project (or your custom Flutter project) and run:
 
-     ```bash
-     dart run <script_name.dart>
-     ```
+   ```bash
+   flutter run
+   ```
 
-   - **For Swift:**  
-     Open the Xcode project from the appropriate directory and run the build target.
-
-*Refer to inline documentation within the source code for any project-specific configuration details.*
+*Note: For detailed configuration options, please refer to inline comments within the source code and associated documentation.*
 
 ---
 
 ## Usage
 
-BhargavaSwara can be used to:
+BhargavaSwara is engineered to offer a seamless experience for both analysis and synthesis of music:
 
-- **Analyze Audio:** Process recordings to extract key features such as pitch, timbre, and rhythm.
-- **Synthesize Sound:** Create musical sequences that reflect the nuances of Indian Classical music.
-- **Extend Functionality:** Use the examples provided in the `bhargava_swara/examples` folder as a starting point for custom projects.
+- **Analyzing Music:**
+  - Process audio files or live input to detect ragas, talas, tempo, and ornamentations.
+  - Generate detailed spectrograms (MFCC, Mel spectrograms) and signal graphs for in-depth analysis.
+  - Utilize the Hindustani/Carnatic identifier to classify music styles.
 
-Explore the source code for detailed usage patterns and additional functionality.
+- **Synthesizing Music:**
+  - Create realistic instrument sounds through advanced synthesis algorithms.
+  - Generate a tanpura drone to provide a harmonic base.
+  - Experiment with tala generation to create rhythmic cycles.
+
+Explore the example applications in the `bhargava_swara/examples` directory for practical usage scenarios and further guidance.
 
 ---
 
 ## Contributing
 
-Contributions are welcome! To contribute:
+Contributions are welcome to enhance BhargavaSwara. Follow these steps to contribute:
 
 1. **Fork the Repository**
 
@@ -149,16 +165,15 @@ Contributions are welcome! To contribute:
    git commit -m "Description of your feature"
    ```
 
-4. **Push to Your Fork**
+4. **Push Your Branch**
 
    ```bash
    git push origin feature/YourFeatureName
    ```
 
-5. **Open a Pull Request**  
-   Describe your changes and submit for review.
+5. **Submit a Pull Request:** Provide a detailed description of your changes for review.
 
-Please follow the existing coding style and include tests where applicable.
+Please ensure that your contributions follow the established coding standards and include appropriate tests.
 
 ---
 
@@ -170,21 +185,19 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 
-For questions or further information, please reach out via:
+For questions, suggestions, or further information, please reach out via:
 
 - **Email:** [email@example.com](mailto:email@example.com)
-- **GitHub Issues:** Open an issue in this repository for bug reports or feature requests.
+- **GitHub Issues:** Open an issue on the repository for support or discussion.
 
 ---
 
 ## Acknowledgments
 
-- Special thanks to all contributors and the Indian Classical Music community for their support and inspiration.
-- Inspired by a rich tradition of musical theory and modern audio processing research.
+- Gratitude to the Indian Classical Music community for inspiring this project.
+- Thanks to all contributors who have helped build and improve BhargavaSwara.
+- Acknowledgment to open source projects and research in signal processing and audio analysis that laid the groundwork for these innovations.
 
 ---
 
-```
-
-Simply copy and paste this content into your `README.md` file to get started.
 ```
