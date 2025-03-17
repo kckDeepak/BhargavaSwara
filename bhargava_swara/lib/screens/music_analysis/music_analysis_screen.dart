@@ -16,22 +16,31 @@ class MusicAnalysisScreen extends StatelessWidget {
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: [
-            _buildNavigationButton(context, "Carnatic/Hindustani Identification", CarnaticHindustaniScreen()),
-            _buildNavigationButton(context, "Ornamentation/Alankar Detection", OrnamentationDetectionScreen()),
-            _buildNavigationButton(context, "Repeated Pattern Recognition", RepeatedPatternRecognitionScreen()),
-            _buildNavigationButton(context, "Tala Recognition", TalaRecognitionScreen()),
-            _buildNavigationButton(context, "Raga Recognition", RagaRecognitionScreen()),
+            _buildNavigationButton(
+                context,
+                "Carnatic/Hindustani Identification",
+                CarnaticHindustaniScreen()),
+            _buildNavigationButton(context, "Ornamentation/Alankar Detection",
+                OrnamentationDetectionScreen()),
+            _buildNavigationButton(context, "Tempo Pattern Recognition",
+                RepeatedPatternRecognitionScreen()),
+            _buildNavigationButton(
+                context, "Tala Recognition", TalaRecognitionScreen()),
+            _buildNavigationButton(
+                context, "Raga Recognition", RagaRecognitionScreen()),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildNavigationButton(BuildContext context, String title, Widget screen) {
+  Widget _buildNavigationButton(
+      BuildContext context, String title, Widget screen) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: ElevatedButton(
-        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => screen)),
+        onPressed: () => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => screen)),
         child: Text(title),
       ),
     );

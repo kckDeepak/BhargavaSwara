@@ -13,7 +13,8 @@ class RepeatedPatternRecognitionScreen extends StatefulWidget {
       _RepeatedPatternRecognitionScreenState();
 }
 
-class _RepeatedPatternRecognitionScreenState extends State<RepeatedPatternRecognitionScreen> {
+class _RepeatedPatternRecognitionScreenState
+    extends State<RepeatedPatternRecognitionScreen> {
   File? _selectedFile;
   String _analysisResult = "No file selected";
   Interpreter? _interpreter; // TFLite model interpreter
@@ -26,7 +27,8 @@ class _RepeatedPatternRecognitionScreenState extends State<RepeatedPatternRecogn
 
   Future<void> _loadModel() async {
     try {
-      _interpreter = await Interpreter.fromAsset('assets/repeated_pattern_model.tflite');
+      _interpreter =
+          await Interpreter.fromAsset('assets/repeated_pattern_model.tflite');
       print("Model Loaded Successfully!");
     } catch (e) {
       print("Error loading model: $e");
@@ -61,25 +63,28 @@ class _RepeatedPatternRecognitionScreenState extends State<RepeatedPatternRecogn
   Future<void> _detectPatterns(String filePath) async {
     // Convert WAV file to spectrogram (Example for local model)
     var inputTensor = _prepareInputData(filePath);
-    
-    var outputTensor = List.filled(10, 0.0).reshape([1, 10]); // Dummy output shape
+
+    var outputTensor =
+        List.filled(10, 0.0).reshape([1, 10]); // Dummy output shape
     _interpreter?.run(inputTensor, outputTensor);
 
     setState(() {
-      _analysisResult = "Repeated Patterns Detected:\n- Pattern 1 at 00:10 - 00:20\n- Pattern 2 at 01:05 - 01:15";
+      _analysisResult =
+          "Repeated Patterns Detected:\n- Pattern 1 at 00:10 - 00:20\n- Pattern 2 at 01:05 - 01:15";
     });
   }
 
   List<List<double>> _prepareInputData(String filePath) {
     // TODO: Convert WAV to MFCC features and return as input tensor
-    return List.generate(128, (_) => List.generate(20, (_) => 0.0)); // Dummy data
+    return List.generate(
+        128, (_) => List.generate(20, (_) => 0.0)); // Dummy data
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Repeated Pattern Recognition"),
+        title: Text("Tempo Pattern Recognition"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

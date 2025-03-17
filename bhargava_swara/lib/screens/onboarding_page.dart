@@ -33,7 +33,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     OnboardingPageModel(
       title: "Bhargava Swara",
       description: "Analysis and Synthesis of Indian Classical Music",
-      image: "../../assets/images/bhargava_swara_logo.jpg",
+      image: "assets/images/bhargava_swara_logo.jpg",
       bgColor: Colors.deepPurple,
     ),
     OnboardingPageModel(

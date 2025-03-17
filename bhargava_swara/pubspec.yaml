@@ -99,8 +99,8 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
 
-assets:
-  - assets/images/bhargava_swara_logo.jpg
-  - assets/images/music_analysis_logo.jpg
-  - assets/images/music_synthesis_logo.jpg
-  - assets/images/follow_us_logo.png
+  assets:
+    - assets/images/bhargava_swara_logo.jpg
+    - assets/images/music_analysis_logo.jpg
+    - assets/images/music_synthesis_logo.jpg
+    - assets/images/follow_us_logo.png
