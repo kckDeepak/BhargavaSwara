@@ -12,25 +12,70 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text("Bhargava Swara")),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
+        padding: EdgeInsets.all(8.0),
+        child: GridView.count(
+          crossAxisCount: 2,
+          padding: EdgeInsets.all(20),
+          childAspectRatio: 1,
+          mainAxisSpacing: 20,
+          crossAxisSpacing: 20,
           children: [
-            _buildNavigationButton(context, "Music Analysis", MusicAnalysisScreen()),
-            _buildNavigationButton(context, "Exploratory Tools", ExploratoryToolsScreen()),
-            _buildNavigationButton(context, "Music Synthesis", MusicSynthesisScreen()),
-            _buildNavigationButton(context, "Profile & History", ProfileScreen()),
+            _buildButton(
+              context,
+              'Music Analysis',
+              Icons.music_note,
+              MusicAnalysisScreen(),
+            ),
+            _buildButton(
+              context,
+              'Exploratory Tools',
+              Icons.explore,
+              ExploratoryToolsScreen(),
+            ),
+            _buildButton(
+              context,
+              'Music Synthesis',
+              Icons.audiotrack,
+              MusicSynthesisScreen(),
+            ),
+            _buildButton(
+              context,
+              'Profile',
+              Icons.person,
+              ProfileScreen(),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildNavigationButton(BuildContext context, String title, Widget screen) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: ElevatedButton(
-        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => screen)),
-        child: Text(title),
+  Widget _buildButton(
+      BuildContext context, String title, IconData icon, Widget screen) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors
+            .lightBlueAccent, // Changed this line to set the button color to orange
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        padding: EdgeInsets.all(15),
+      ),
+      onPressed: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => screen),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, size: 50, color: Colors.white),
+          SizedBox(height: 10),
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.white, fontSize: 16),
+          ),
+        ],
       ),
     );
   }
