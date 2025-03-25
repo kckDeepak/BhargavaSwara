@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:http/http.dart' as http;
 
 class RagaRecognitionScreen extends StatefulWidget {
   const RagaRecognitionScreen({super.key});
@@ -31,53 +32,70 @@ class _RagaRecognitionScreenState extends State<RagaRecognitionScreen> {
     await Permission.microphone.request();
   }
 
+  // Function to send audio file to Python backend and get the result
+  Future<void> _analyzeAudio(File audioFile) async {
+    setState(() {
+      _detectedRaga = "Processing audio...";
+    });
+
+    var request = http.MultipartRequest(
+      'POST',
+      Uri.parse('http://localhost:5000/analyze-raga'), // Update with your backend URL
+    );
+    request.files.add(await http.MultipartFile.fromPath('audio', audioFile.path));
+
+    try {
+      var response = await request.send();
+      if (response.statusCode == 200) {
+        var result = await response.stream.bytesToString();
+        setState(() {
+          _detectedRaga = "Detected Raga: $result";
+        });
+      } else {
+        setState(() {
+          _detectedRaga = "Error: Failed to analyze (Status: ${response.statusCode})";
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _detectedRaga = "Error: $e";
+      });
+    }
+  }
+
   Future<void> _pickAudioFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.audio,
     );
 
     if (result != null) {
-      setState(() {
-        _selectedAudioFile = File(result.files.single.path!);
-        _detectedRaga = "Processing audio...";
-      });
-
-      // Placeholder for ML Model Processing
-      Future.delayed(Duration(seconds: 3), () {
-        setState(() {
-          _detectedRaga = "Detected Raga: Yaman (Placeholder)";
-        });
-      });
+      _selectedAudioFile = File(result.files.single.path!);
+      await _analyzeAudio(_selectedAudioFile!);
     }
   }
 
-Future<void> _startRecording() async {
-  if (await Permission.microphone.request().isGranted) {
-    var tempDir = await getTemporaryDirectory();
-    var toFile = '${tempDir.path}/raga_recorded.wav';
-    await _audioRecorder!.startRecorder(
-      toFile: toFile,
-    );
-    setState(() {
-      _isRecording = true;
-      _recordedFilePath = toFile;
-    });
+  Future<void> _startRecording() async {
+    if (await Permission.microphone.request().isGranted) {
+      var tempDir = await getTemporaryDirectory();
+      var toFile = '${tempDir.path}/raga_recorded.wav';
+      await _audioRecorder!.startRecorder(toFile: toFile);
+      setState(() {
+        _isRecording = true;
+        _recordedFilePath = toFile;
+      });
+    }
   }
-}
 
   Future<void> _stopRecording() async {
     await _audioRecorder!.stopRecorder();
     setState(() {
       _isRecording = false;
-      _detectedRaga = "Processing recording...";
     });
 
-    // Placeholder for ML Model Processing
-    Future.delayed(Duration(seconds: 3), () {
-      setState(() {
-        _detectedRaga = "Detected Raga: Bhairavi (Placeholder)";
-      });
-    });
+    if (_recordedFilePath != null) {
+      File recordedFile = File(_recordedFilePath!);
+      await _analyzeAudio(recordedFile);
+    }
   }
 
   @override
