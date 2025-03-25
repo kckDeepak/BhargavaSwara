@@ -1,37 +1,16 @@
 import 'package:flutter/material.dart';
 import 'carnatic_hindustani_screen.dart';
 import 'ornamentation_detection.dart';
-import 'repeated_pattern_recognition.dart';
+import 'tempo_recognition.dart';
 import 'tala_recognition.dart';
 import 'raga_recognition.dart';
+import 'real_time_raga_recognition.dart'; // Import the new screen
 
 class MusicAnalysisScreen extends StatelessWidget {
   const MusicAnalysisScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // return Scaffold(
-    //   appBar: AppBar(title: Text("Music Analysis")),
-    //   body: Padding(
-    //     padding: EdgeInsets.all(16.0),
-    //     child: Column(
-    //       children: [
-    //         _buildNavigationButton(
-    //             context,
-    //             "Carnatic/Hindustani Identification",
-    //             CarnaticHindustaniScreen()),
-    //         _buildNavigationButton(context, "Ornamentation/Alankar Detection",
-    //             OrnamentationDetectionScreen()),
-    //         _buildNavigationButton(context, "Tempo Pattern Recognition",
-    //             RepeatedPatternRecognitionScreen()),
-    //         _buildNavigationButton(
-    //             context, "Tala Recognition", TalaRecognitionScreen()),
-    //         _buildNavigationButton(
-    //             context, "Raga Recognition", RagaRecognitionScreen()),
-    //       ],
-    //     ),
-    //   ),
-    // );
     return Scaffold(
       appBar: AppBar(title: Text("Bhargava Swara")),
       body: Padding(
@@ -59,7 +38,7 @@ class MusicAnalysisScreen extends StatelessWidget {
               context,
               'Tempo Pattern Recognition',
               Icons.audiotrack,
-              RepeatedPatternRecognitionScreen(),
+              TempoRecognitionScreen(),
             ),
             _buildButton(
               context,
@@ -73,6 +52,12 @@ class MusicAnalysisScreen extends StatelessWidget {
               Icons.person,
               RagaRecognitionScreen(),
             ),
+            _buildButton(
+              context,
+              'Real-Time Raga Recognition',
+              Icons.mic, // Icon representing real-time audio input
+              RealTimeRagaRecognitionScreen(),
+            ),
           ],
         ),
       ),
@@ -83,8 +68,7 @@ class MusicAnalysisScreen extends StatelessWidget {
       BuildContext context, String title, IconData icon, Widget screen) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors
-            .lightBlueAccent, // Changed this line to set the button color to orange
+        backgroundColor: Colors.lightBlueAccent,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),

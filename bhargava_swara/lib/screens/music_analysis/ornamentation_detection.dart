@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
+import 'package:http/http.dart' as http;
 
 class OrnamentationDetectionScreen extends StatefulWidget {
   const OrnamentationDetectionScreen({super.key});
@@ -10,9 +11,41 @@ class OrnamentationDetectionScreen extends StatefulWidget {
       _OrnamentationDetectionScreenState();
 }
 
-class _OrnamentationDetectionScreenState extends State<OrnamentationDetectionScreen> {
+class _OrnamentationDetectionScreenState
+    extends State<OrnamentationDetectionScreen> {
   File? _selectedFile;
   String _analysisResult = "No file selected";
+
+  Future<void> _analyzeAudio(File audioFile) async {
+    setState(() {
+      _analysisResult = "Processing...";
+    });
+
+    var request = http.MultipartRequest(
+      'POST',
+      Uri.parse('http://localhost:5002/analyze-ornamentation'), // Update with your backend URL
+    );
+    request.files.add(await http.MultipartFile.fromPath('audio', audioFile.path));
+
+    try {
+      var response = await request.send();
+      if (response.statusCode == 200) {
+        var result = await response.stream.bytesToString();
+        setState(() {
+          _analysisResult = "Detected: $result";
+        });
+      } else {
+        setState(() {
+          _analysisResult =
+              "Error: Failed to analyze (Status: ${response.statusCode})";
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _analysisResult = "Error: $e";
+      });
+    }
+  }
 
   Future<void> _pickFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -20,17 +53,11 @@ class _OrnamentationDetectionScreenState extends State<OrnamentationDetectionScr
     );
 
     if (result != null) {
+      _selectedFile = File(result.files.single.path!);
       setState(() {
-        _selectedFile = File(result.files.single.path!);
         _analysisResult = "Processing...";
       });
-
-      // Simulating analysis (Replace this with actual ML/audio processing logic)
-      Future.delayed(Duration(seconds: 2), () {
-        setState(() {
-          _analysisResult = "Detected: Meend, Gamak, Kan";
-        });
-      });
+      await _analyzeAudio(_selectedFile!);
     }
   }
 

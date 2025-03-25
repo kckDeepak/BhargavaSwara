@@ -6,16 +6,16 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 
-class TalaRecognitionScreen extends StatefulWidget {
-  const TalaRecognitionScreen({super.key});
+class TempoRecognitionScreen extends StatefulWidget {
+  const TempoRecognitionScreen({super.key});
 
   @override
-  _TalaRecognitionScreenState createState() => _TalaRecognitionScreenState();
+  _TempoRecognitionScreenState createState() => _TempoRecognitionScreenState();
 }
 
-class _TalaRecognitionScreenState extends State<TalaRecognitionScreen> {
+class _TempoRecognitionScreenState extends State<TempoRecognitionScreen> {
   File? _selectedAudioFile;
-  String _detectedTala = "No analysis yet";
+  String _detectedTempo = "No analysis yet";
   FlutterSoundRecorder? _audioRecorder;
   bool _isRecording = false;
   String? _recordedFilePath;
@@ -32,15 +32,14 @@ class _TalaRecognitionScreenState extends State<TalaRecognitionScreen> {
     await Permission.microphone.request();
   }
 
-  // Function to send audio file to Python backend and get the result
   Future<void> _analyzeAudio(File audioFile) async {
     setState(() {
-      _detectedTala = "Processing audio...";
+      _detectedTempo = "Processing audio...";
     });
 
     var request = http.MultipartRequest(
       'POST',
-      Uri.parse('http://localhost:5000/analyze-tala'), // Update with your backend URL
+      Uri.parse('http://localhost:5004/analyze-tempo'), // Update with your backend URL
     );
     request.files.add(await http.MultipartFile.fromPath('audio', audioFile.path));
 
@@ -49,16 +48,16 @@ class _TalaRecognitionScreenState extends State<TalaRecognitionScreen> {
       if (response.statusCode == 200) {
         var result = await response.stream.bytesToString();
         setState(() {
-          _detectedTala = "Detected Tala: $result";
+          _detectedTempo = "Detected Tempo: $result";
         });
       } else {
         setState(() {
-          _detectedTala = "Error: Failed to analyze (Status: ${response.statusCode})";
+          _detectedTempo = "Error: Failed to analyze (Status: ${response.statusCode})";
         });
       }
     } catch (e) {
       setState(() {
-        _detectedTala = "Error: $e";
+        _detectedTempo = "Error: $e";
       });
     }
   }
@@ -77,7 +76,7 @@ class _TalaRecognitionScreenState extends State<TalaRecognitionScreen> {
   Future<void> _startRecording() async {
     if (await Permission.microphone.request().isGranted) {
       var tempDir = await getTemporaryDirectory();
-      _recordedFilePath = '${tempDir.path}/tala_recorded.wav';
+      _recordedFilePath = '${tempDir.path}/tempo_recorded.wav';
       await _audioRecorder!.startRecorder(toFile: _recordedFilePath);
       setState(() {
         _isRecording = true;
@@ -106,21 +105,18 @@ class _TalaRecognitionScreenState extends State<TalaRecognitionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Tala Recognition")),
+      appBar: AppBar(title: Text("Tempo Recognition")),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // File Upload Button
             ElevatedButton.icon(
               onPressed: _pickAudioFile,
               icon: Icon(Icons.file_upload),
               label: Text("Upload Audio File"),
             ),
             SizedBox(height: 10),
-
-            // Recording Controls
             _isRecording
                 ? ElevatedButton.icon(
                     onPressed: _stopRecording,
@@ -134,14 +130,12 @@ class _TalaRecognitionScreenState extends State<TalaRecognitionScreen> {
                     label: Text("Start Recording"),
                   ),
             SizedBox(height: 20),
-
-            // Detected Tala Output
             Card(
-              color: Colors.blue.shade50,
+              color: Colors.orange.shade50,
               child: Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Text(
-                  _detectedTala,
+                  _detectedTempo,
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
