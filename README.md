@@ -1,8 +1,9 @@
+
 # BhargavaSwara
 
 **A Flutter Application for Indian Classical Music Analysis & Synthesis**
 
-BhargavaSwara is a cross-platform Flutter application that integrates the [BhargavaSwara Library](https://github.com/Shouryaanga-Tribe/BhargavaSwaraLibrary) to provide an intuitive interface for analyzing and synthesizing Indian Classical Music. Designed for musicians, researchers, and enthusiasts, this app leverages advanced signal processing and machine learning techniques to explore the rich traditions of Indian music.
+BhargavaSwara is a cross-platform Flutter application integrated with a Flask-based backend for advanced Indian Classical Music analysis and synthesis. Designed for musicians, researchers, and enthusiasts, this app leverages the [BhargavaSwara Library](https://github.com/Shouryaanga-Tribe/BhargavaSwaraLibrary) to provide an intuitive interface for analyzing ragas, talas, tempos, traditions, ornaments, and full music compositions. The deployed version is accessible at [BhargavaSwara Flask Service](https://bhargava-swara-flask-service-765294418264.us-east1.run.app/).
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![Languages](https://img.shields.io/github/languages/count/Shouryaanga-Tribe/BhargavaSwara)](https://github.com/Shouryaanga-Tribe/BhargavaSwara)
 
@@ -17,6 +18,7 @@ BhargavaSwara is a cross-platform Flutter application that integrates the [Bharg
 - [Repository Structure](#repository-structure)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Deployed Backend](#deployed-backend)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
@@ -26,33 +28,39 @@ BhargavaSwara is a cross-platform Flutter application that integrates the [Bharg
 
 ## Overview
 
-BhargavaSwara combines a modern Flutter-based frontend with the powerful BhargavaSwara Library, offering a seamless experience for Indian Classical Music analysis and synthesis. From real-time raga identification to generating tanpura drones, this app bridges tradition and technology with a user-friendly design.
+BhargavaSwara combines a modern Flutter-based frontend with a powerful Flask backend deployed on Google Cloud Run, offering a seamless experience for Indian Classical Music analysis and synthesis. The app supports real-time audio analysis and music generation, bridging traditional Indian music with cutting-edge technology. The deployed backend at [https://bhargava-swara-flask-service-765294418264.us-east1.run.app/](https://bhargava-swara-flask-service-765294418264.us-east1.run.app/) provides API endpoints for music analysis, accessible via an API key.
 
 ---
 
 ## Features
 
 ### Music Analysis
-- **Raga Recognition:** Detect and classify ragas from audio input.
-- **Tala Recognition:** Identify rhythmic cycles (talas) in performances.
+- **Raga Recognition:** Identify and classify ragas from uploaded audio files.
+- **Tala Recognition:** Detect rhythmic cycles (talas) in performances.
 - **Tempo Detection:** Calculate the tempo of musical pieces.
+- **Tradition Identification:** Differentiate between Hindustani and Carnatic music traditions.
 - **Ornamentation Detection:** Recognize and categorize musical embellishments.
-- **Hindustani/Carnatic Identifier:** Differentiate between music traditions.
-- **Real-Time Analysis:** Analyze live audio streams instantly.
-- **Spectrogram Visualizations:** Display MFCC, Mel spectrograms, and signal graphs.
+- **Full Music Analysis:** Comprehensive analysis of audio for all musical components.
+- **Spectrogram Visualizations:** Display MFCC, Mel spectrograms, and signal graphs (available in the Flutter app).
 
 ### Music Synthesis
-- **Instrument Imitation:** Replicate traditional instrument sounds.
-- **Tanpura Drone Generation:** Create harmonic tanpura drones.
-- **Tala Generation:** Generate rhythmic patterns for practice.
+- **Instrument Imitation:** Replicate traditional Indian instrument sounds.
+- **Tanpura Drone Generation:** Create harmonic tanpura drones for practice.
+- **Tala Generation:** Generate rhythmic patterns for accompaniment.
+
+### Backend Integration
+- **Flask API:** The deployed backend processes audio uploads and returns detailed analysis results.
+- **API Key Authentication:** Secure access to analysis endpoints via user-provided API keys.
 
 ---
 
 ## Technologies Used
 
-- **Flutter:** Cross-platform UI framework for Android, iOS, and more.
+- **Flutter:** Cross-platform UI framework for Android, iOS, and web.
 - **Dart:** Language for app logic and UI development.
+- **Flask:** Python-based backend framework for API services.
 - **BhargavaSwara Library:** Core audio processing and analysis (C++ backend).
+- **Google Cloud Run:** Serverless platform hosting the Flask backend.
 - **CMake:** Build system for native components.
 - **Swift:** Native iOS/macOS integration (optional).
 
@@ -60,19 +68,22 @@ BhargavaSwara combines a modern Flutter-based frontend with the powerful Bhargav
 
 ## Google Tools Used
 
-BhargavaSwara leverages several Google tools to enhance development, testing, and machine learning capabilities:
+BhargavaSwara leverages Google tools to enhance development, testing, and deployment:
 
 - **Google Colab:**  
-  A cloud-based Jupyter notebook environment used for prototyping and testing audio analysis algorithms. Colab provided an accessible platform for experimenting with signal processing techniques and integrating them with the BhargavaSwara Library.
+  Used for prototyping and testing audio analysis algorithms. Colab facilitated experimentation with signal processing and machine learning models for raga and tala detection.
 
 - **Project IDX:**  
-  Google’s Project IDX, an integrated development environment (IDE), was utilized to streamline the development workflow. It enabled rapid prototyping of the Flutter frontend and seamless integration with native C++ components. Project IDX’s cloud-based features also facilitated collaborative coding and testing across different devices and platforms.
+  Google’s cloud-based IDE streamlined Flutter frontend development and integration with native C++ components. It supported collaborative coding and cross-platform testing.
 
 - **Gemini APIs:**  
-  The Gemini APIs, part of Google’s generative AI suite, were employed to enhance music analysis and synthesis. These APIs powered advanced machine learning models for raga and ornamentation detection, leveraging their natural language and pattern recognition capabilities to interpret complex musical structures. The APIs were integrated into the app for real-time processing and to support the generation of synthesized musical elements like tanpura drones.
+  Integrated for advanced music analysis, including raga, ornamentation, and tradition detection. These APIs enhance the backend’s ability to process complex musical structures.
 
 - **TensorFlow:**  
-  TensorFlow, Google’s open-source machine learning framework, was used in conjunction with Colab to train and fine-tune models for audio feature extraction (e.g., MFCCs and spectrograms). These models were later optimized for deployment within the BhargavaSwara Library, ensuring efficient performance on mobile devices.
+  Used in Colab to train and optimize machine learning models for audio feature extraction (e.g., MFCCs, spectrograms). These models are integrated into the BhargavaSwara Library for efficient mobile performance.
+
+- **Google Cloud Run:**  
+  Hosts the Flask backend, providing scalable and secure API services for audio analysis at [https://bhargava-swara-flask-service-765294418264.us-east1.run.app/](https://bhargava-swara-flask-service-765294418264.us-east1.run.app/).
 
 ---
 
@@ -80,31 +91,46 @@ BhargavaSwara leverages several Google tools to enhance development, testing, an
 
 ```
 BhargavaSwara/
-├── .vscode/                   # VSCode settings and configurations
+├── .idx/                      # Project IDX configuration
+├── android/                   # Android-specific Flutter code
+├── dartpad/                   # DartPad integration files
+├── extension_discovery/       # Extension discovery configurations
+├── flutter_build/             # Flutter build scripts
 ├── lib/                       # Flutter source code
 │   ├── screens/              # UI screens for analysis and synthesis
 │   ├── widgets/              # Reusable UI components
-│   └── services/             # BhargavaSwara Library integration
-├── assets/                    # Sample audio files and images
-├── native/                    # Native C++ and Swift code
+│   └── services/             # BhargavaSwara Library and Flask API integration
+├── test/                      # Unit and integration tests
+├── web/                       # Web-specific Flutter code
+├── .gitignore                # Git ignore file
+├── .metadata                 # Project metadata
+├── analysis_options.yaml      # Dart analysis configuration
+├── package_config.json        # Package configuration
+├── package_config_subset/     # Subset of package configurations
+├── pubspec.lock              # Dependency lock file
+├── pubspec.yaml              # Flutter project dependencies
+├── version                    # Version information
 ├── README.md                  # Project documentation
 └── LICENSE                    # MIT License file
 ```
 
-- **lib:** Core Flutter code, organized into screens, widgets, and services.
-- **assets:** Resources for testing and demonstration.
-- **native:** Native code linking to the BhargavaSwara Library.
+- **lib:** Core Flutter code for the frontend, including screens, widgets, and API services.
+- **android/web:** Platform-specific code for Android and web deployments.
+- **test:** Test suites for ensuring code reliability.
+- **flutter_build:** Scripts for building the Flutter app.
 
 ---
 
 ## Installation
 
 ### Prerequisites
-- **Flutter SDK:** Download from [flutter.dev](https://flutter.dev/docs/get-started/install).
+- **Flutter SDK:** Install from [flutter.dev](https://flutter.dev/docs/get-started/install).
 - **Dart:** Included with Flutter.
-- **BhargavaSwara Library:** Must be installed and linked (see [BhargavaSwara Library repo](https://github.com/Shouryaanga-Tribe/BhargavaSwaraLibrary)).
+- **BhargavaSwara Library:** Install and link from [BhargavaSwara Library repo](https://github.com/Shouryaanga-Tribe/BhargavaSwaraLibrary).
 - **C++ Compiler:** Supports C++11 or later.
 - **CMake:** For building native code.
+- **Python:** For running the Flask backend locally (optional).
+- **Google Cloud SDK:** For deploying to Cloud Run (optional).
 
 ### Setup Steps
 
@@ -114,7 +140,7 @@ BhargavaSwara/
    cd BhargavaSwara
    ```
 
-2. **Install Dependencies**
+2. **Install Flutter Dependencies**
    ```bash
    flutter pub get
    ```
@@ -127,29 +153,54 @@ BhargavaSwara/
    make
    ```
 
-4. **Run the App**
+4. **Run the Flutter App**
    ```bash
    flutter run
    ```
 
-*Note: Check code comments for additional setup instructions.*
+5. **(Optional) Run the Flask Backend Locally**
+   - Ensure Python and Flask are installed.
+   - Navigate to the Flask backend directory (if separate) and run:
+     ```bash
+     python app.py
+     ```
+
+*Note: Check code comments for platform-specific setup instructions.*
 
 ---
 
 ## Usage
 
-BhargavaSwara offers an interactive platform for music analysis and synthesis:
+BhargavaSwara provides an interactive platform for music analysis and synthesis:
 
 - **Analyzing Music:**  
-  - Use the microphone or upload audio files.  
-  - View real-time raga, tala, and tempo analysis.  
-  - Explore spectrograms within the app.
+  - Upload an audio file via the Flutter app or the web interface at [https://bhargava-swara-flask-service-765294418264.us-east1.run.app/](https://bhargava-swara-flask-service-765294418264.us-east1.run.app/).
+  - Enter your API key to authenticate with the backend.
+  - Select analysis options: Raga, Tala, Tempo, Tradition, Ornaments, or Full Music.
+  - View results, including spectrograms, in the app or web interface.
 
 - **Synthesizing Music:**  
-  - Generate tanpura drones or instrument sounds.  
-  - Create and customize tala patterns.
+  - Generate tanpura drones or instrument sounds in the Flutter app.
+  - Create and customize tala patterns for practice.
 
-Sample assets are included in the `assets` directory for testing.
+Sample audio files are included in the `assets` directory for testing.
+
+---
+
+## Deployed Backend
+
+The Flask backend is deployed on Google Cloud Run at [https://bhargava-swara-flask-service-765294418264.us-east1.run.app/](https://bhargava-swara-flask-service-765294418264.us-east1.run.app/). It provides API endpoints for:
+
+- **Audio Upload:** Upload audio files for analysis.
+- **Analysis Endpoints:** Raga, Tala, Tempo, Tradition, Ornaments, and Full Music analysis.
+- **API Key Authentication:** Secure access to analysis features.
+
+To use the backend:
+1. Obtain an API key (contact the repository owner if not provided).
+2. Upload an audio file via the web interface or send a POST request to the appropriate endpoint (e.g., `/analyze/raga`).
+3. View results returned as JSON or displayed in the web interface.
+
+For local development or custom deployment, refer to the Flask backend code (if available in a separate repository or directory).
 
 ---
 
@@ -180,7 +231,7 @@ We welcome contributions! To contribute:
 
 5. **Submit a Pull Request:** Provide a detailed description.
 
-Adhere to coding standards and include tests where applicable.
+Adhere to coding standards, include tests, and ensure compatibility with the deployed backend.
 
 ---
 
@@ -199,8 +250,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Acknowledgments
 
-- The Indian Classical Music community for their inspiration.
-- BhargavaSwara Library team for their foundational work.
-- Contributors and testers for their valuable feedback.
-
----
+- The Indian Classical Music community for inspiration and feedback.
+- BhargavaSwara Library team for their foundational audio processing work.
+- Google Cloud and Project IDX teams for development and deployment tools.
+- Contributors and testers for their valuable input.
